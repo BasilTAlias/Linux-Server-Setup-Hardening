@@ -23,6 +23,7 @@ sudo apt update && sudo apt upgrade -y
 ### 2. Create a New User and Grant Sudo Privileges
 
 sudo adduser yourusername
+
 sudo usermod -aG sudo yourusername
 
 ### 3. Harden SSH Configuration
@@ -30,6 +31,7 @@ sudo usermod -aG sudo yourusername
 - Disabled root login and password authentication in /etc/ssh/sshd_config:
 
 PermitRootLogin no
+
 PasswordAuthentication no
 
 - Restarted SSH service:
@@ -39,13 +41,17 @@ sudo systemctl restart sshd
 ### 4. Configure UFW Firewall
 
 sudo ufw allow OpenSSH
+
 sudo ufw enable
+
 sudo ufw status
 
 ### 5. Install and Configure Fail2ban
 
 sudo apt install fail2ban -y
+
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+
 
 - Enabled SSH jail in /etc/fail2ban/jail.local:
 
@@ -66,6 +72,7 @@ sudo fail2ban-client status sshd
 ### 6. Enable Automatic Security Updates
 
 sudo apt install unattended-upgrades -y
+
 sudo dpkg-reconfigure --priority=low unattended-upgrades
 
 ---
